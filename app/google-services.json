@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1099170956000",
+    "project_id": "waveforms-62231",
+    "storage_bucket": "waveforms-62231.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1099170956000:android:2a3dd3bd69237fed830685",
+        "android_client_info": {
+          "package_name": "com.example.waveforms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1099170956000-p7ot7v4dcfnaoor0ns3t8o8akd4rea87.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-4vhJacxDdgIR9Qr2g7YcwzvlIO2V9SY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1099170956000-p7ot7v4dcfnaoor0ns3t8o8akd4rea87.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

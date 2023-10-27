@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">waveforms</string>
+    <string name="mic_input">mic input</string>
+    <string name="generate_random">Generate Random</string>
+    <string name="exit">exit</string>
+    <string name="start">start</string>
+    <string name="stop">stop</string>
+</resources>
