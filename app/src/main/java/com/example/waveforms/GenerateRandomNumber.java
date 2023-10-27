@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,22 +13,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.waveforms.R;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.github.mikephil.charting.utils.EntryXComparator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GenerateRandomNumber extends AppCompatActivity {
 
     //declare variables
     private LineChart lineChart;
-    private List<Entry> entries = new ArrayList<>();
-    private int xValue = 0; //x co-ordinates
+    private LineDataSet dataSet;
+    private LineData lineData;
+    private float xValue = 1.0F; //x co-ordinates
     private Random random = new Random();   //generates random number
-    private Handler handler = new Handler();    //schedules tasks on main UI thread
+    private Timer timer = new Timer();  //timer
     private final int interval = 1000; // 1000 milliseconds = 1 second
 
     @Override
@@ -36,14 +44,16 @@ public class GenerateRandomNumber extends AppCompatActivity {
         setContentView(R.layout.activity_generate_random_number);
 
         lineChart = findViewById(R.id.lineChart);   //initialise line chart
+        lineChart.setDragEnabled(true);
+        lineChart.setScaleEnabled(true);
 
         Button exit = findViewById(R.id.exit);
         exit.setOnClickListener(v -> {
             Intent intent = new Intent(GenerateRandomNumber.this, MainActivity.class);
             startActivity(intent);
-
             finish();
-    });
+        });
+
 
         // Add desc for line chart
         Description description = new Description();
@@ -51,38 +61,51 @@ public class GenerateRandomNumber extends AppCompatActivity {
         lineChart.setDescription(description);
 
         // Create an empty LineDataSet
-        LineDataSet dataSet = new LineDataSet(entries, "Dynamic Data");
+        dataSet = new LineDataSet(
+                new ArrayList<>()
+                , "Dynamic Data");
         dataSet.setColor(Color.BLUE);
         dataSet.setCircleColor(Color.BLUE);
         dataSet.setLineWidth(2f);
-        dataSet.setDrawValues(false);
+        dataSet.setDrawValues(true);
 
-        // Start generating random data points
-        handler.postDelayed(runnable, interval);
-
-        // Create a LineData object with the LineDataSet and set it on the chart
-        LineData lineData = new LineData(dataSet);
+        lineData = new LineData(dataSet);
         lineChart.setData(lineData);
-        lineChart.invalidate(); // Initial chart rendering
+
+        // Start generating random data
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                addPointToChart();
+            }
+        }, interval, interval);
+
     }
 
-    private Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            // Generate a random value
-            float newValue = generateRandomValue();
+    @Override
+    protected void onDestroy() {
+        // Stop the random data generation
+        timer.cancel();
+        super.onDestroy();
+    }
 
-            // Add the new data point
-            entries.add(new Entry(xValue++, newValue));
-
-            // Notify the chart of the data update
-            lineChart.notifyDataSetChanged();
-            lineChart.invalidate();
-
-            // Continue generating data points
-            handler.postDelayed(this, interval);
+    private void addPointToChart() {
+        // Add new point to chart
+        Entry entry = new Entry(xValue++, generateRandomValue());
+        // add new entry to chart
+        if (dataSet.getEntryCount() > 10) {
+            dataSet.removeFirst();
         }
-    };
+        dataSet.addEntry(entry);
+        //update chart
+        dataSet.notifyDataSetChanged();
+        lineData.notifyDataChanged();
+        lineChart.notifyDataSetChanged();
+        // Refresh chart
+        runOnUiThread(() -> lineChart.invalidate());
+
+
+    }
 
     private float generateRandomValue() {
         return Math.abs(random.nextFloat() * 100);
