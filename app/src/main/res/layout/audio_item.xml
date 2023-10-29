@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+
+    <ImageView
+        android:id="@+id/AudioFileIcon"
+        android:src= "@drawable/ic_audio_icon"
+        android:layout_width="60dp"
+        android:padding="4dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/FileName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="4dp"
+        android:text="File name"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/AudioFileIcon"
+        app:layout_constraintTop_toTopOf="@+id/AudioFileIcon" />
+
+    <TextView
+        android:id="@+id/AudioExtension"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="4dp"
+        android:text="Mp3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/AudioFileIcon"
+        app:layout_constraintTop_toBottomOf="@+id/FileName" />
+
+    <TextView
+        android:id="@+id/AudioDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="06:30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/AudioExtension"
+        app:layout_constraintTop_toBottomOf="@+id/FileName" />
+
+    <TextView
+        android:id="@+id/AudioDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20-06-23"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/AudioDuration"
+        app:layout_constraintStart_toEndOf="@+id/AudioDuration"
+        app:layout_constraintTop_toTopOf="@+id/AudioExtension" />
+
+    <ImageView
+        android:id="@+id/PlayIcon"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:src="@drawable/play_icon"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
