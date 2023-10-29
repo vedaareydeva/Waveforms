@@ -210,13 +210,13 @@ public class MicrophoneInput extends AppCompatActivity {
         // Start recording audio
         if (!isRecording.get()) {
             // Start a new recording
-            isRecording.set(true);
             // check for microphone permission
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     this.requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, 1234);
                 }
             } else {
+                isRecording.set(true);
                 audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC,Constants.RECORDER_SAMPLERATE, Constants.RECORDER_CHANNELS ,Constants.RECORDER_AUDIO_ENCODING ,BUFFER_SIZE );
                 audioRecord.startRecording();
                 fileName = "Recording_" + System.currentTimeMillis() + ".pcm";
@@ -227,7 +227,6 @@ public class MicrophoneInput extends AppCompatActivity {
                 Stop.setEnabled(true);
                 updateGraph();
             }
-
         }
     }
 
