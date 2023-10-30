@@ -6,45 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".MicrophoneInput"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="top">
 
     <com.github.mikephil.charting.charts.LineChart
-        android:id = "@+id/lineChart"
+        android:id="@+id/lineChart"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="275dp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="147dp"
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
         android:layout_gravity="center"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/BtnStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
             android:gravity="center_horizontal|center_vertical"
-            android:layout_marginRight="30dp"
             android:text="@string/start" />
 
         <Button
             android:id="@+id/BtnStop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp"
             android:layout_gravity="center"
             android:gravity="center_horizontal|center_vertical"
             android:text="@string/stop" />
 
-
+        <Button
+            android:id="@+id/BtnExit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Exit" />
     </LinearLayout>
-    <Button
-        android:id="@+id/BtnExit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Exit" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/AudioList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 
 </LinearLayout>
